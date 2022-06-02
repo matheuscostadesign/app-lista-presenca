@@ -6,7 +6,7 @@ import "./styles/global.css";
 import { Home } from "./pages/Home"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Home />
-  </React.StrictMode>
+  //</React.StrictMode> // componente gera duplicacao no useEffect
 )
