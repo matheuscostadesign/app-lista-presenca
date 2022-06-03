@@ -6,6 +6,7 @@ import { Card } from "../../components/Card";
 export function Home() {
   const [studentName, setStudentName] = useState("");
   const [students, setStudents] = useState([]);
+  const [user, setUser] = useState({name: "", avatar: ""});
 
   function handleAddStudent() {
     const newStudent = {
@@ -16,21 +17,27 @@ export function Home() {
         second: "2-digit",
       })
     };
-
     setStudents(prevState => [...prevState, newStudent]);
   }
 
   useEffect(() => {
-    console.log("foi chamado");
-  }, [students]);
+    fetch("https://api.github.com/users/matheuscostadesign")
+    .then(response => response.json())
+    .then(data => {
+      setUser({
+        name: data.name,
+        avatar: data.avatar_url
+      })
+    })
+  }, []);
 
   return (
     <div className="container">
       <header>
         <h1>Lista de Presença</h1>
         <div>
-          <strong>Matheus</strong>
-          <img src="https://github.com/matheuscostadesign.png" alt="Foto" />
+          <strong>{user.name}</strong>
+          <img src={user.avatar} alt="Foto" />
         </div>
       </header>
 
